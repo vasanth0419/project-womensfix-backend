@@ -12,13 +12,6 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.use(
-  cors({
-    origin: "https://womens-fix.netlify.app",
-    credentials: true,
-  })
-);
-
 app.use(morgan("dev"));
 
 app.use(cookieParser());
