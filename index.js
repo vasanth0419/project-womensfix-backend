@@ -14,11 +14,10 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://womens-fix.netlify.app",
+    origin: "https://womensfix.netlify.app/",
     credentials: true,
   })
 );
-
 app.use(morgan("dev"));
 
 app.use(cookieParser());
