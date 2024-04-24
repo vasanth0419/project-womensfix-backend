@@ -14,10 +14,11 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://tangerine-tulumba-ca215a.netlify.app",
     credentials: true,
   })
 );
+
 app.use(morgan("dev"));
 
 app.use(cookieParser());
