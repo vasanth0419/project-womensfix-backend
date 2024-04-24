@@ -11,7 +11,12 @@ import trendsrouter from "./Router/Trends.router.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from this origin
+    credentials: true, // Allow credentials to be included
+  })
+);
 
 app.use(morgan("dev"));
 
