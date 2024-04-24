@@ -14,7 +14,7 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://tangerine-tulumba-ca215a.netlify.app",
+    origin: "https://womens-fix.netlify.app/",
     credentials: true,
   })
 );
