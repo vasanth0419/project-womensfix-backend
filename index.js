@@ -14,7 +14,7 @@ const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: "https://womensfix.netlify.app/",
+    origin: "https://womensfix.netlify.app",
     credentials: true,
   })
 );
