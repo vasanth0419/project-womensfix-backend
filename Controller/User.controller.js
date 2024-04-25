@@ -39,34 +39,17 @@ export const loginUser = async (req, res) => {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: "user not found" });
+      return res.status(401).json({ message: "User not found" });
     }
     const matchPassword = await bcrypt.compare(password, user.password);
     if (!matchPassword) {
-      return res.status(401).json({ message: "invalid password" });
+      return res.status(401).json({ message: "Invalid password" });
     }
-    const token = jwt.sign(
-      {
-        username: user.username,
-        id: user._id,
-        name: user.name,
-      },
-      process.env.jwt_secret
-    );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      sameSite: "none",
-      expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours from now
-      secure: true,
-    });
-
-    res.status(200).json({ message: "login successful" });
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error(error); // Log the error for debugging purposes
-    res.status(500).json({
-      error: "Internal server Error",
-    });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -212,7 +195,6 @@ export const resetPassword = async (req, res) => {
     }
   }
 };
-
 
 // delete user
 
