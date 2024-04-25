@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT;
 app.use(
   cors({
-    origin: "https://womoens-fix.netlify.app",
+    origin: "https://womens-fix.netlify.app",
     credentials: true,
   })
 );
