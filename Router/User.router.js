@@ -18,7 +18,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 router.get("/getuserbyid/:userid", getUserById);
 router.post("/forgetpassword", forgetPassword);
-router.get("/resetpassword/:token", resetPassword);
+router.get("/resetpassword", resetPassword);
 router.delete("/deleteuser/:userId", deleteUserById);
 router.post("/adminlogin", registerAdminUser);
 export default router;

@@ -123,34 +123,23 @@ export const forgetPassword = async (req, res) => {
 
 export const resetPassword = async (req, res) => {
   try {
-    const { id, token } = req.params;
+    const { token } = req.params;
     const { newPassword } = req.body;
 
-    // Validate token, user ID, and new password
-    if (!token || !id || !newPassword) {
-      return res
-        .status(400)
-        .json({ message: "Invalid token, user ID, or new password" });
-    }
-
-    // Find the user by ID
-    const user = await User.findById(id);
-
-    // Check if the user exists
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    // Validate token and new password
+    if (!token) {
+      return res.status(400).json({ message: "Invalid token or new password" });
     }
 
     // If token exists, it's a password reset request
     if (token) {
-      // Check if the reset token matches the one stored in the user document
-      if (user.resetToken !== token) {
-        return res.status(400).json({ message: "Invalid reset token" });
-      }
+      // Verify and decode the reset token
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Check if the token has expired
-      if (Date.now() > user.resetPasswordExpires) {
-        return res.status(400).json({ message: "Token expired" });
+      // Find user by email
+      const user = await User.findOne({ email: decodedToken.email });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
       }
 
       // Hash the new password
@@ -168,8 +157,8 @@ export const resetPassword = async (req, res) => {
       // Verify and decode the reset token
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
 
-      // Find user by email
-      const user = await User.findOne({ email: decodedToken.email });
+      // Find user by ID
+      const user = await User.findById(decodedToken.userId);
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
