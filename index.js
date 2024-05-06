@@ -7,6 +7,7 @@ import { connectDB } from "./Database/Dbconfig.js";
 import userrouter from "./Router/User.router.js";
 import dressrouter from "./Router/Dress.router.js";
 import trendsrouter from "./Router/Trends.router.js";
+import dresscolorrouter from "./Router/Color.router.js";
 
 dotenv.config();
 const app = express();
@@ -27,6 +28,7 @@ connectDB();
 app.use("/user", userrouter);
 app.use("/dresses", dressrouter);
 app.use("/trends", trendsrouter);
+app.use("/colordress", dresscolorrouter);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
