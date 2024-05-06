@@ -105,7 +105,7 @@ export const forgetPassword = async (req, res) => {
     await user.save();
 
     // Send email with password reset link
-    const resetLink = `http://localhost:3000/resetpassword/${user.id}/${token}`;
+    const resetLink = `https://womens-fix.netlify.app/resetpassword/${token}`;
     await sendEmail(
       email,
       "Password Reset",
